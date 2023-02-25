@@ -4,19 +4,20 @@ import { Container } from './styles';
 
 interface IAudiPreviewPlayer {
   previewUrl: string;
+  duration_ms: number;
 }
 
 export function AudioPreviewPlayer(props: IAudiPreviewPlayer) {
-  const { previewUrl } = props;
+  const { previewUrl, duration_ms } = props;
 
   const audioRef = useRef<HTMLAudioElement>(null);
   const [inPlaying, setInPlaying] = useState(false);
   const [timePlayed, setTimePlayed] = useState(0);
-  const [duration, setDuration] = useState(0);
 
   function handlePlayPreview() {
     audioRef.current?.play();
     setInPlaying(true);
+    console.log(inPlaying);
   }
 
   function handlePausePreview() {
@@ -30,16 +31,11 @@ export function AudioPreviewPlayer(props: IAudiPreviewPlayer) {
     setTimePlayed(currentTime);
   }
 
-  function loadData(e: React.SyntheticEvent) {
-    const { duration }: { duration: number } = e.target as HTMLMediaElement;
-    setTimePlayed(duration);
-  }
-
   return (
     <Container>
       <span>Resumo</span>
       <span>
-        {inPlaying && timePlayed < duration ? (
+        {inPlaying && timePlayed < duration_ms ? (
           <button onClick={handlePausePreview} className='play'>
             <FaPause size={16} />
           </button>
@@ -49,12 +45,7 @@ export function AudioPreviewPlayer(props: IAudiPreviewPlayer) {
           </button>
         )}
 
-        <audio
-          src={previewUrl}
-          ref={audioRef}
-          onTimeUpdate={updateTime}
-          onLoadedData={loadData}
-        />
+        <audio src={previewUrl} ref={audioRef} onTimeUpdate={updateTime} />
       </span>
     </Container>
   );
