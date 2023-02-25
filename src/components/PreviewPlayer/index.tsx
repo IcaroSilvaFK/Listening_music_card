@@ -24,6 +24,17 @@ export function AudioPreviewPlayer(props: IAudiPreviewPlayer) {
     setInPlaying(false);
   }
 
+  function updateTime(e: React.SyntheticEvent) {
+    const { currentTime }: { currentTime: number } =
+      e.target as HTMLMediaElement;
+    setTimePlayed(currentTime);
+  }
+
+  function loadData(e: React.SyntheticEvent) {
+    const { duration }: { duration: number } = e.target as HTMLMediaElement;
+    setTimePlayed(duration);
+  }
+
   return (
     <Container>
       <span>Resumo</span>
@@ -41,8 +52,8 @@ export function AudioPreviewPlayer(props: IAudiPreviewPlayer) {
         <audio
           src={previewUrl}
           ref={audioRef}
-          onTimeUpdate={(e) => setTimePlayed(e.target.currentTime)}
-          onLoadedData={(e) => setDuration(e.target.duration)}
+          onTimeUpdate={updateTime}
+          onLoadedData={loadData}
         />
       </span>
     </Container>
