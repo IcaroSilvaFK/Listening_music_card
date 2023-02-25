@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 
 interface IDataProps {
   access_token: string;
@@ -43,26 +44,21 @@ interface ICardMusicProps {
 }
 
 export function useLoadData() {
-  const [token, setToken] = useState('');
-  const [data, setData] = useState<DataProps | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      const data: IDataProps = await fetch(
-        'https://rest-go.onrender.com/api/_v1/access_token',
-        {
-          headers: { 'Content-Type': 'application/json; charset=utf-8' },
-        }
-      ).then((resp) => resp.json());
-      setToken(data.access_token);
-    })();
-  }, []);
-
-  useEffect(() => {
-    if (!token) return;
-    (async () => {
+  const [timeToRetry, setTimeToRetry] = useState(0);
+  const { data: token } = useQuery<IDataProps>(['@token'], async () => {
+    const data = await fetch(
+      'https://rest-go.onrender.com/api/_v1/access_token',
+      {
+        headers: { 'Content-Type': 'application/json; charset=utf-8' },
+      }
+    ).then((resp) => resp.json());
+    return data;
+  });
+  const { data } = useQuery(
+    ['@music'],
+    async () => {
       const data: ICardMusicProps = await fetch(
-        `https://rest-go.onrender.com/api/_v1/now_playing/${token}`,
+        `https://rest-go.onrender.com/api/_v1/now_playing/${token?.access_token}`,
         {
           headers: {
             'Content-Type': 'application/json; charset=utf-8',
@@ -70,12 +66,16 @@ export function useLoadData() {
           mode: 'cors',
         }
       ).then((resp) => resp.json());
-
-      setData(data.result);
-    })();
-  }, [token]);
+      setTimeToRetry(data.result.item.duration_ms);
+      return data;
+    },
+    {
+      refetchInterval: timeToRetry,
+      enabled: !!token?.access_token,
+    }
+  );
 
   return {
-    data,
+    data: data?.result,
   };
 }

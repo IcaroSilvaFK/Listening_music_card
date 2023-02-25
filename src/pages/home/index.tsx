@@ -10,8 +10,6 @@ import { Card, Container, Footer, MusicEmpty } from './styles';
 export function App() {
   const { data } = useLoadData();
 
-  console.log({ data });
-
   return (
     <Container>
       {data ? (
@@ -31,10 +29,7 @@ export function App() {
                   artists={data?.item.album.artists}
                   duration={data.item.duration_ms}
                 />
-                <AudioPreviewPlayer
-                  previewUrl={data.item.preview_url}
-                  duration_ms={data.item.duration_ms}
-                />
+                <AudioPreviewPlayer previewUrl={data.item.preview_url} />
               </div>
               <ProgressBar rating={data.item.popularity} />
             </Footer>

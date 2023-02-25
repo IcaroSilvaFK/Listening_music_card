@@ -32,6 +32,10 @@ export const Card = styled.article`
     flex-direction: column;
     padding: 22px;
   }
+
+  @media screen and (max-width: 500px) {
+    min-width: 90%;
+  }
 `;
 
 export const Footer = styled.footer`
@@ -46,8 +50,13 @@ export const Footer = styled.footer`
 `;
 
 export const MusicEmpty = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   h1 {
     font-family: ${({ theme }) => theme.fonts.elite};
     color: ${({ theme }) => theme.white};
+    text-align: center;
   }
 `;

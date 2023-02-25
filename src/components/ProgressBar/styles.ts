@@ -4,6 +4,7 @@ export const Container = styled.div<{ rating: number }>`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   span {
     color: ${({ theme }) => theme.white};
     font-family: ${({ theme }) => theme.fonts.poppins};
@@ -19,7 +20,7 @@ export const Container = styled.div<{ rating: number }>`
     overflow: hidden;
     background: #4a5568;
     position: relative;
-
+    overflow: hidden;
     div {
       flex: 1;
       width: ${({ rating }) => rating}%;
