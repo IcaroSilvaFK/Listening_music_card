@@ -17,7 +17,6 @@ export function AudioPreviewPlayer(props: IAudiPreviewPlayer) {
   function handlePlayPreview() {
     audioRef.current?.play();
     setInPlaying(true);
-    console.log(inPlaying);
   }
 
   function handlePausePreview() {
