@@ -4,6 +4,9 @@ import { Logo } from '../../components/Logo';
 import { MusicDetails } from '../../components/MusicDetails';
 import { AudioPreviewPlayer } from '../../components/PreviewPlayer';
 import { ProgressBar } from '../../components/ProgressBar';
+import { ImageAndTitleSkeleton } from '../../components/Skeletons/ImageAndTitle';
+import { RatingSkeleton } from '../../components/Skeletons/Rating';
+import { TitleAndTimeSkeleton } from '../../components/Skeletons/TitleAndTime';
 import { useLoadData } from '../../hooks/useLoadData';
 import { Card, Container, Footer, MusicEmpty } from './styles';
 
@@ -12,15 +15,22 @@ export function App() {
 
   return (
     <Container>
-      {isLoading && (
-        <MusicEmpty>
-          <h1>Carregando...</h1>
-        </MusicEmpty>
-      )}
       {!isLoading && !data && (
-        <MusicEmpty>
-          <h1>Nenhuma musica tocando...</h1>
-        </MusicEmpty>
+        <Card>
+          <header>
+            <Logo />
+          </header>
+          <section>
+            <ImageAndTitleSkeleton />
+            <Footer>
+              <div>
+                <TitleAndTimeSkeleton />
+                <TitleAndTimeSkeleton />
+              </div>
+              <RatingSkeleton />
+            </Footer>
+          </section>
+        </Card>
       )}
       {!isLoading && data && (
         <Card>

@@ -8,6 +8,7 @@ specifiers:
   '@vitejs/plugin-react': ^3.1.0
   polished: ^4.2.2
   react: ^18.2.0
+  react-content-loader: ^6.2.0
   react-dom: ^18.2.0
   react-icons: ^4.7.1
   styled-components: ^5.3.6
@@ -18,6 +19,7 @@ dependencies:
   '@tanstack/react-query': 4.24.10_biqbaboplfbrettd7655fr4n2y
   polished: 4.2.2
   react: 18.2.0
+  react-content-loader: 6.2.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-icons: 4.7.1_react@18.2.0
   styled-components: 5.3.6_biqbaboplfbrettd7655fr4n2y
@@ -876,6 +878,15 @@ packages:
       picocolors: 1.0.0
       source-map-js: 1.0.2
     dev: true
+
+  /react-content-loader/6.2.0_react@18.2.0:
+    resolution: {integrity: sha512-r1dI6S+uHNLW68qraLE2njJYOuy6976PpCExuCZUcABWbfnF3FMcmuESRI8L4Bj45wnZ7n8g71hkPLzbma7/Cw==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16.0.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /react-dom/18.2.0_react@18.2.0:
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
