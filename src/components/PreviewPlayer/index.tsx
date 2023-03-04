@@ -32,7 +32,7 @@ export function AudioPreviewPlayer(props: IAudiPreviewPlayer) {
 
   return (
     <Container>
-      <span>Resumo</span>
+      <span>Summary</span>
       <span>
         {inPlaying && timePlayed < duration ? (
           <button onClick={handlePausePreview} className='play'>

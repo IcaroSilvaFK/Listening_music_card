@@ -34,7 +34,7 @@ export function App() {
       )}
       {!isLoading && !data && (
         <MusicEmpty>
-          <h1>Nenhuma musica tocando...</h1>
+          <h1>No music playing...</h1>
         </MusicEmpty>
       )}
       {!isLoading && data && (
