@@ -13,7 +13,7 @@ export function MusicTitle(props: IHeaderCardProps) {
     <Container>
       <img src={imageSource} alt={title} />
       <div>
-        <span>{isPlaying ? 'Tocando agora!' : 'Sem músicas tocando'}</span>
+        <span>{isPlaying ? 'Playing now!' : 'No songs playing!'}</span>
         <h1>{title}</h1>
       </div>
     </Container>
